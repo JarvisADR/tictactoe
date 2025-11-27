@@ -1,8 +1,13 @@
-// Tipe data untuk nilai kotak: X, O, atau null
+// src/utils/gameLogic.ts
 export type Player = 'X' | 'O' | null;
 
-export function calculateWinner(squares: Player[]): Player {
-  // Semua kemungkinan garis kemenangan [a, b, c]
+// Kita tambahkan interface baru untuk hasil
+export interface WinResult {
+  winner: Player;
+  line: number[] | null;
+}
+
+export function calculateWinner(squares: Player[]): WinResult {
   const lines = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8], // Horizontal
     [0, 3, 6], [1, 4, 7], [2, 5, 8], // Vertikal
@@ -11,10 +16,12 @@ export function calculateWinner(squares: Player[]): Player {
 
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
-    // Cek apakah kotak a ada isinya, dan sama dengan b & c
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      // Kembalikan object, bukan cuma string
+      return { winner: squares[a], line: [a, b, c] };
     }
   }
-  return null;
+  
+  // Jika tidak ada pemenang, kembalikan object kosong
+  return { winner: null, line: null };
 }
