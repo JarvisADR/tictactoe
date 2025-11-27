@@ -1,4 +1,5 @@
-// src/components/Board.tsx
+//border
+
 import React from 'react';
 import { Square } from './Square';
 import { Player } from '../utils/gameLogic';

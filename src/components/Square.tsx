@@ -1,11 +1,12 @@
-// src/components/Square.tsx
+// kotak buat isi
+
 import React from 'react';
 import { Player } from '../utils/gameLogic';
 
 interface SquareProps {
   value: Player;
   onSquareClick: () => void;
-  isWinningSquare: boolean; // <-- Tambahan
+  isWinningSquare: boolean;
 }
 
 export const Square: React.FC<SquareProps> = ({ value, onSquareClick, isWinningSquare }) => {

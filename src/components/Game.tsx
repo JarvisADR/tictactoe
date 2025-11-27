@@ -1,4 +1,4 @@
-// src/components/Game.tsx
+// sistem gamenya
 
 import React, { useState } from 'react';
 import { Board } from './Board';
@@ -9,7 +9,6 @@ export const Game: React.FC = () => {
   const [xIsNext, setXIsNext] = useState<boolean>(true);
   const [isGameStarted, setIsGameStarted] = useState<boolean>(false);
 
-  // Ambil winner DAN line dari fungsi logic
   const { winner, line } = calculateWinner(squares);
   
   const isDraw = !winner && squares.every((square) => square !== null);
@@ -20,7 +19,6 @@ export const Game: React.FC = () => {
   };
 
   const handlePlay = (i: number) => {
-    // Cek winner pakai properti .winner karena return valuenya sekarang objek
     if (calculateWinner(squares).winner || squares[i]) {
       return;
     }
@@ -35,6 +33,7 @@ export const Game: React.FC = () => {
     setIsGameStarted(false);
   };
 
+// pilih simbol
   if (!isGameStarted) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
@@ -52,6 +51,7 @@ export const Game: React.FC = () => {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
       <h1 className="text-3xl font-bold mb-8 text-gray-800">Tic-Tac-Toe</h1>
       
+      {/* udah menang */}
       <div className="mb-4 text-xl font-semibold">
         {winner 
           ? <span className="text-green-600 font-bold">{winner} Win the game! </span>
@@ -60,9 +60,9 @@ export const Game: React.FC = () => {
           : <span>Next Player: <span className={xIsNext ? "text-blue-600" : "text-red-500"}>{xIsNext ? 'X' : 'O'}</span></span>}
       </div>
 
-      {/* Oper winningLine ke Board */}
       <Board squares={squares} onPlay={handlePlay} winningLine={line} />
 
+      {/* tombol reset */}
       <button
         onClick={resetGame}
         className="mt-8 px-6 py-2 bg-gray-600 text-white rounded-full"
