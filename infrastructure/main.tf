@@ -19,7 +19,7 @@ resource "azurerm_subnet" "aks_subnet" {
   address_prefixes     = ["10.0.1.0/24"]
 }
 
-# Azure Container Registry (Gudang Image)
+# Azure Container Registry
 resource "random_string" "acr_suffix" {
   length  = 6
   special = false
@@ -56,10 +56,13 @@ resource "azurerm_kubernetes_cluster" "aks" {
   network_profile {
     network_plugin    = "azure"
     load_balancer_sku = "standard"
+
+    service_cidr       = "10.1.0.0/16"
+    dns_service_ip     = "10.1.0.10"
+    docker_bridge_cidr = "172.17.0.1/16"
   }
 }
 
-# Beri izin AKS akses ke ACR
 resource "azurerm_role_assignment" "aks_acr_pull" {
   principal_id                     = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
   role_definition_name             = "AcrPull"
