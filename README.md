@@ -29,8 +29,6 @@ Langkah ini akan "membeli" server dan jaringan di Azure.
     ```
 
 ### 3. Deploy ke Kubernetes (AKS)
-Menjalankan container yang sudah di-upload ke dalam cluster Kubernetes.
-
 1.  Sambungkan terminal lokal ke Cluster AKS:
     ```bash
     az aks get-credentials --resource-group bljr-rg --name bljr-aks
