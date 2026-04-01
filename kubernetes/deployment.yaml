@@ -16,9 +16,28 @@ spec:
       - name: acr-secret
       containers:
       - name: tictactoe
-        image: jarvisregis.azurecr.io/tictactoe:3
+        image: jarvisregis.azurecr.io/tictactoe:latest
         ports:
         - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
 ---
 apiVersion: v1
 kind: Service
@@ -29,5 +48,6 @@ spec:
   ports:
   - port: 80
     targetPort: 80
+    nodePort: 30007
   selector:
     app: tictactoe
