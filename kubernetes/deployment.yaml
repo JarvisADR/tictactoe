@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: tictactoe
-        image: bljracr36wi3m.azurecr.io/tictactoe:v1
+        image: jarvisregis.azurecr.io/tictactoe:3
         ports:
         - containerPort: 80
 ---
