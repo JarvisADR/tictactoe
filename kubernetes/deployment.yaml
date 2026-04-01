@@ -12,6 +12,8 @@ spec:
       labels:
         app: tictactoe
     spec:
+      imagePullSecrets:
+      - name: acr-secret
       containers:
       - name: tictactoe
         image: jarvisregis.azurecr.io/tictactoe:3
